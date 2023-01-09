@@ -3,3 +3,6 @@ node_moduels
 
 .idea
 ./idea
+
+.dist
+./dist
