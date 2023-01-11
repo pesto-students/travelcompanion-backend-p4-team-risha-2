@@ -4,6 +4,10 @@ import * as cors from 'cors';
 import * as cookieSession from 'cookie-session';
 import {CLIENT_URL} from "./constants";
 import {RouterRoutes} from "./routes/router.routes";
+import * as mongoose from 'mongoose'
+
+const url = 'mongodb://localhost/travelCompanion'
+
 class App {
   app: express.Application;
   routes: RouterRoutes = new RouterRoutes();
@@ -29,6 +33,14 @@ class App {
 
     // Routes
     this.routes.routes(this.app)
+
+    //db connection
+    mongoose.connect(url)
+    const con = mongoose.connection
+
+    con.on('open', () => { 
+        console.log("connected....")
+    })
   }
 }
 

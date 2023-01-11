@@ -14,7 +14,8 @@ export class RouterRoutes {
     app.get("/google", this.authenticationController.passportAuthenticateGoogle);
     app.get("/google/callback", this.authenticationController.googleCallback);
     app.get("/preferences", this.preferencesController.getPrefernces)
-    app.get("/preferences/:id", this.preferencesController.getPreferncesByID)
+    app.get("/preferences/id", this.preferencesController.getPreferncesByID)
+    app.post("/preferences", this.preferencesController.postPrefernces)
   }
 
 }
