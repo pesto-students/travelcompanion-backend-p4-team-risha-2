@@ -24,10 +24,10 @@ export class PreferencesController {
 
         //save to db 
         try {
-            const p1 = await prefernce.save();
-            res.json(p1)
+            const prefernceData = await prefernce.save();
+            res.json(prefernceData)
         } catch (err) {
-            res.send('Error')
+            res.send(err)
         }
     }
 
