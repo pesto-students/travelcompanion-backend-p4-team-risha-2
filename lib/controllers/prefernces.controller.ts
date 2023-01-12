@@ -9,17 +9,24 @@ export class PreferencesController {
         res.json(prefernce)
     }
 
-    async postPrefernces(req: Request, res: Response){
-        const prefernce =  new Prefernces({
-            name:req.body.name,
-            email:req.body.email
+    async postPrefernces(req: Request, res: Response) {
+        console.log(req.body)
+           
+        const prefernce = new Prefernces({
+            "name": req.body.name,
+            "email": req.body.email,
+            "phone": req.body.phone,
+            "Iam": req.body.Iam,
+            "location": req.body.location,
+            "gender": req.body.gender,
+            // intrest:""
         })
-    
+
         //save to db 
-        try{
-           const p1 =  await prefernce.save();
-           res.json(p1)
-        }catch(err){
+        try {
+            const p1 = await prefernce.save();
+            res.json(p1)
+        } catch (err) {
             res.send('Error')
         }
     }
@@ -43,4 +50,3 @@ export class PreferencesController {
         res.json(p1)
     }
 }
-    

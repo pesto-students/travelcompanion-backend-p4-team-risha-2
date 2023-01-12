@@ -31,6 +31,12 @@ class App {
       cookieSession({name:"session",keys:["lama"], maxAge: 24*60*60*100 })
     )
 
+    this.app.use((req, res, next) => {
+      res.header('Access-Control-Allow-Origin', CLIENT_URL);
+      next();
+    });
+    
+
     // Routes
     this.routes.routes(this.app)
 
