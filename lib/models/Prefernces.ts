@@ -1,5 +1,6 @@
 import IPrefernces from "interfaces/prefernces"
-import mongoose, { Schema } from "mongoose"
+import { Schema } from "mongoose"
+import * as mongoose from "mongoose"
 
 const PreferncesSchema: Schema = new Schema(
     {

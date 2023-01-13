@@ -8,7 +8,9 @@ export class RouterRoutes {
 
   routes(app: Application) {
     app.route("/").get(this.authenticationController.hello);
-    app.get("/login/", this.authenticationController.loginSuccess);
+    app.post("/login/", this.authenticationController.loginSuccess);
+    app.post("/register/", this.authenticationController.register);
+    app.get("/user/", this.authenticationController.UserDetails);
     app.get("/login/failed", this.authenticationController.loginFailed);
     app.get("/logout", this.authenticationController.logout);
     app.get("/google", this.authenticationController.login);
