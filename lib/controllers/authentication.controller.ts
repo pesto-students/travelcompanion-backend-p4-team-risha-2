@@ -1,6 +1,6 @@
 
 import { Request, Response, NextFunction} from "express";
-import * as passport from 'passport';
+import * as passport from "passport";
 import {CLIENT_URL} from "../constants";
 export class AuthenticationController {
 
