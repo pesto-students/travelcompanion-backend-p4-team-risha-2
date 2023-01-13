@@ -8,6 +8,8 @@ export class AuthenticationController {
     res.send("hello");
   }
 
+  login = () => passport.authenticate("google",{scope: ["profile"]})
+
   loginSuccess(req: Request, res: Response, next: NextFunction) {
     /*if(req.user){
       res.status(200).json({

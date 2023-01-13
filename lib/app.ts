@@ -5,6 +5,8 @@ import * as cookieSession from 'cookie-session';
 import {CLIENT_URL} from "./constants";
 import {RouterRoutes} from "./routes/router.routes";
 import * as mongoose from 'mongoose'
+import * as passportConfig from './config/passport';
+import * as passport from "passport";
 
 const url = 'mongodb://localhost/travelCompanion'
 
@@ -35,7 +37,11 @@ class App {
       res.header('Access-Control-Allow-Origin', CLIENT_URL);
       next();
     });
-    
+
+    // Passport
+    this.app.use(passport.initialize())
+    this.app.use(passport.session())
+
 
     // Routes
     this.routes.routes(this.app)
@@ -44,7 +50,7 @@ class App {
     mongoose.connect(url)
     const con = mongoose.connection
 
-    con.on('open', () => { 
+    con.on('open', () => {
         console.log("connected....")
     })
   }

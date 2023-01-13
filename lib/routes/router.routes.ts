@@ -11,7 +11,7 @@ export class RouterRoutes {
     app.get("/login/", this.authenticationController.loginSuccess);
     app.get("/login/failed", this.authenticationController.loginFailed);
     app.get("/logout", this.authenticationController.logout);
-    app.get("/google", this.authenticationController.passportAuthenticateGoogle);
+    app.get("/google", this.authenticationController.login);
     app.get("/google/callback", this.authenticationController.googleCallback);
     app.get("/preferences", this.preferencesController.getPrefernces)
     app.get("/preferences/id", this.preferencesController.getPreferncesByID)
