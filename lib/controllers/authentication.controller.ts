@@ -16,7 +16,7 @@ export class AuthenticationController {
   loginSuccess(req: Request, res: Response, next: NextFunction) {
     passport.authenticate("local", (err, user, info) => {
       if (err) throw err;
-      if (!user) res.send("No User Exists");
+      if (!user) res.status(401).send("No User Exists");
       else {
         req.logIn(user, (err) => {
         console.log(user)
@@ -47,7 +47,7 @@ export class AuthenticationController {
 
   loginFailed(req: Request, res: Response) {
     res.status(401).json({
-      success: false,
+      success: false, 
       message: "failure",
     });
   }
