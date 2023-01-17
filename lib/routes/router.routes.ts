@@ -16,7 +16,7 @@ export class RouterRoutes {
     app.get("/google", this.authenticationController.login);
     app.get("/google/callback", this.authenticationController.googleCallback);
     app.get("/preferences", this.preferencesController.getPrefernces)
-    app.get("/preferences/id", this.preferencesController.getPreferncesByID)
+    app.get("/preferences/:login_id", this.preferencesController.getPreferncesByID)
     app.post("/preferences", this.preferencesController.postPrefernces)
   }
 

@@ -10,6 +10,7 @@ const PreferncesSchema: Schema = new Schema(
         Iam: { type: String, required: true },
         location: { type: String, required: true },
         gender: { type: String, required: true },
+        login_id: { type: String, required: false },
         // intrest: { type: String, required: false },
     })
 
