@@ -5,8 +5,22 @@ import * as cookieSession from 'cookie-session';
 import {CLIENT_URL} from "./constants";
 import {RouterRoutes} from "./routes/router.routes";
 import * as mongoose from 'mongoose'
+import * as session from 'express-session'
+import * as cookieParser from 'cookie-parser'
+import * as passport from "passport";
 
-const url = 'mongodb://localhost/travelCompanion'
+//db connection
+mongoose.connect(
+  "mongodb+srv://teasm2-US:RtkltsLh1YZSroUq@cluster0.nymn7fl.mongodb.net/?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.log("Mongoose Is Connected");
+  }
+);
+
 
 class App {
   app: express.Application;
@@ -35,18 +49,25 @@ class App {
       res.header('Access-Control-Allow-Origin', CLIENT_URL);
       next();
     });
-    
+
+    // Passport
+    this.app.use(passport.initialize())
+    this.app.use(passport.session())
+
 
     // Routes
     this.routes.routes(this.app)
 
-    //db connection
-    mongoose.connect(url)
-    const con = mongoose.connection
+    this.app.use(
+      session({
+        secret: "secretcode",
+        resave: true,
+        saveUninitialized: true,
+      })
+    );
 
-    con.on('open', () => { 
-        console.log("connected....")
-    })
+    this.app.use(cookieParser("secretcode"));
+    require("./config/passport")(passport);
   }
 }
 

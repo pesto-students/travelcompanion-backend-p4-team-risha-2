@@ -7,5 +7,6 @@ export default interface IPrefernces extends Document {
     Iam: String,
     location: String,
     gender: String,
+    login_id:string
     // intrest:String
 }
