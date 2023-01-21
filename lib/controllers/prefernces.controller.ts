@@ -10,7 +10,7 @@ export class PreferencesController {
     }
 
     async postPrefernces(req: Request, res: Response) {
-        console.log(req.body)
+        // console.log(req.body)
            
         const prefernce = new Prefernces({
             "name": req.body.name,
@@ -44,6 +44,14 @@ export class PreferencesController {
         // console.log(req.params,Prefernces,prefernce)
         // res.json(prefernce)
     }
+
+    async getPreferncesBylocation(req: Request, res: Response) {
+        console.log("p",req.params.location)
+        const prefernce = await Prefernces.findOne({location:req.params.location});
+        console.log(req.body.location,prefernce)
+        res.json(prefernce)
+    }
+
 
     async deletePreferences(req: Request, res: Response) {
         const prefernce = await Prefernces.findById(req.params.id);

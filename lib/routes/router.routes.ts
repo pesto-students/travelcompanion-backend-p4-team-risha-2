@@ -1,10 +1,12 @@
 import {AuthenticationController} from "../controllers/authentication.controller";
 import {PreferencesController} from "../controllers/prefernces.controller";
+import { MapPlacesController } from "../controllers/mapPlaces.controller";
 import {Application} from "express";
 
 export class RouterRoutes {
   authenticationController: AuthenticationController = new AuthenticationController();
   preferencesController: PreferencesController = new PreferencesController();
+  mapPlacesController: MapPlacesController = new MapPlacesController();
 
   routes(app: Application) {
     app.route("/").get(this.authenticationController.hello);
@@ -17,7 +19,9 @@ export class RouterRoutes {
     app.get("/google/callback", this.authenticationController.googleCallback);
     app.get("/preferences", this.preferencesController.getPrefernces)
     app.get("/preferences/:login_id", this.preferencesController.getPreferncesByID)
-    app.post("/preferences", this.preferencesController.postPrefernces)
+    app.post("/preferences", this.preferencesController.postPrefernces);
+    app.get("/mapPlacesbySearch/:location", this.preferencesController.getPreferncesBylocation);
+    app.post("/mapPlaces", this.mapPlacesController.postmapPlaces);
   }
 
 }
