@@ -11,7 +11,7 @@ import * as passport from "passport";
 
 //db connection
 mongoose.connect(
-  "mongodb+srv://teasm2-US:RtkltsLh1YZSroUq@cluster0.nymn7fl.mongodb.net/?retryWrites=true&w=majority",
+  "no cred",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
