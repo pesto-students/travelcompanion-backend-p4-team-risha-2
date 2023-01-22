@@ -1,11 +1,13 @@
 import IMapPlaces from "../interfaces/mapPlaces"
-import { Schema } from "mongoose"
 import * as mongoose from "mongoose"
+import {Schema} from "mongoose"
 
 const MapPlacesSchema: Schema = new Schema(
-    {
-        location: { type: String, required: true },
-    })
+  {
+    location: {type: Object, required: true},
+    placeId: {type: String, required: true},
+    address: {type: String, required: true},
+  })
 
 export default mongoose.model<IMapPlaces>('MapPlaces', MapPlacesSchema)
 
