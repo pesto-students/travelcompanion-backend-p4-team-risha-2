@@ -5,9 +5,12 @@
     "pretty": true,
     "sourceMap": true,
     "target": "esnext",
-    "outDir": "./dist",
+    "outDir": "./build",
     "baseUrl": "./lib",
-    "lib": ["es7", "esnext.asynciterable"]
+    "lib": [
+      "es7",
+      "esnext.asynciterable"
+    ]
   },
   "include": [
     "lib/**/*.ts"
