@@ -21,7 +21,6 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthenticationController = void 0;
-const passport = require("passport");
 const constants_1 = require("../constants");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -34,27 +33,25 @@ class AuthenticationController {
         res.send("hello");
     }
     loginSuccess(req, res, next) {
-        // User.findOne({username: req.body.username}, async (err, user) => {
-        passport.authenticate("local", (err, user, info) => {
+        User_1.User.findOne({ username: req.body.username }, (err, user) => __awaiter(this, void 0, void 0, function* () {
             if (err)
                 throw err;
             if (!user)
                 res.status(401).send("No User Exists");
-            else {
-                req.logIn(user, (err) => {
-                    if (err)
-                        throw err;
-                    const body = { id: user._id };
-                    const token = jwt.sign(body, constants_1.JWT_SECRET);
-                    res.json({
-                        userId: user._id,
-                        token: token
-                    });
+            const password = user.password;
+            const verify = yield bcrypt.compare(req.body.password, password);
+            if (verify) {
+                const body = { id: user._id };
+                const token = jwt.sign(body, constants_1.JWT_SECRET);
+                res.json({
+                    userId: user._id,
+                    token: token
                 });
             }
-            // })
-            // passport.authenticate("local", (err, user, info) => {
-        })(req, res, next);
+            else {
+                res.status(403).send("Invalid Credentials");
+            }
+        }));
     }
     register(req, res) {
         User_1.User.findOne({ username: req.body.username }, (err, doc) => __awaiter(this, void 0, void 0, function* () {
