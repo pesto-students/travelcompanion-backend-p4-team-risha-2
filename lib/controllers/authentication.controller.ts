@@ -6,6 +6,8 @@ import * as jwt from "jsonwebtoken"
 import '../config/passport'
 import {User} from "../models/User";
 import jwtService from "../services/jwt.service";
+import { Preferences } from "../models/Prefernces";
+import {Types} from "mongoose";
 
 export class AuthenticationController {
 
@@ -14,7 +16,8 @@ export class AuthenticationController {
   }
 
   loginSuccess(req: Request, res: Response, next: NextFunction) {
-    passport.authenticate("local", (err, user, info) => {
+    // User.findOne({username: req.body.username}, async (err, user) => {
+      passport.authenticate("local", (err, user, info) => {
       if (err) throw err;
       if (!user) res.status(401).send("No User Exists");
       else {
@@ -28,19 +31,32 @@ export class AuthenticationController {
           });
         });
       }
+    // })
+    // passport.authenticate("local", (err, user, info) => {
+      
     })(req, res, next);
   }
 
   register(req: Request, res: Response) {
     User.findOne({username: req.body.username}, async (err, doc) => {
-      if (err) throw err;
+      // if (err) throw err;
       if (doc) res.send("User Already Exists");
       if (!doc) {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        // const user = await jwtService.verify(req);
 
-        const newUser = new User({
+        const newUser = new Preferences({
           username: req.body.username,
+          email: req.body.email,
           password: hashedPassword,
+          name: req.body.username,
+          "phone": req.body.phone,
+          "Iam": req.body.Iam,
+          "location": req.body.location,
+          "gender": req.body.gender,
+          // user: Types.ObjectId(user.id),
+          // // this is an array of place ID not the mapPlace id
+          travelInterests: req.body.travelInterests
         });
         await newUser.save();
         res.send("User Created");
