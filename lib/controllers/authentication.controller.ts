@@ -3,7 +3,6 @@ import {JWT_SECRET} from "../constants";
 import * as bcrypt from "bcryptjs"
 import * as jwt from "jsonwebtoken"
 import '../config/passport'
-import {User} from "../models/User";
 import jwtService from "../services/jwt.service";
 import {Preferences} from "../models/Prefernces";
 
@@ -14,7 +13,7 @@ export class AuthenticationController {
   }
 
   loginSuccess(req: Request, res: Response, next: NextFunction) {
-    User.findOne({username: req.body.username}, async (err, user) => {
+    Preferences.findOne({email: req.body.username}, async (err, user) => {
       if (err) throw err;
       if (!user) res.status(401).send("No User Exists");
       const password = user.password;
@@ -33,7 +32,7 @@ export class AuthenticationController {
   }
 
   register(req: Request, res: Response) {
-    User.findOne({username: req.body.username}, async (err, doc) => {
+    Preferences.findOne({username: req.body.username}, async (err, doc) => {
       // if (err) throw err;
       if (doc) res.send("User Already Exists");
       if (!doc) {

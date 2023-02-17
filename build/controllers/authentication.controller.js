@@ -25,7 +25,6 @@ const constants_1 = require("../constants");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("../config/passport");
-const User_1 = require("../models/User");
 const jwt_service_1 = require("../services/jwt.service");
 const Prefernces_1 = require("../models/Prefernces");
 class AuthenticationController {
@@ -33,7 +32,7 @@ class AuthenticationController {
         res.send("hello");
     }
     loginSuccess(req, res, next) {
-        User_1.User.findOne({ username: req.body.username }, (err, user) => __awaiter(this, void 0, void 0, function* () {
+        Prefernces_1.Preferences.findOne({ email: req.body.username }, (err, user) => __awaiter(this, void 0, void 0, function* () {
             if (err)
                 throw err;
             if (!user)
@@ -54,7 +53,7 @@ class AuthenticationController {
         }));
     }
     register(req, res) {
-        User_1.User.findOne({ username: req.body.username }, (err, doc) => __awaiter(this, void 0, void 0, function* () {
+        Prefernces_1.Preferences.findOne({ username: req.body.username }, (err, doc) => __awaiter(this, void 0, void 0, function* () {
             // if (err) throw err;
             if (doc)
                 res.send("User Already Exists");
