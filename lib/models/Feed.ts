@@ -3,8 +3,8 @@ import {model, Model, Schema} from "mongoose";
 const feedSchema = new Schema({
   body: {type: String, required: true},
   images: {type: Array, required: false},
-  author: {type: Schema.Types.ObjectId, required: true, ref: 'User'},
-  createdOn: {type: Date, required: true},
+  author: {type: Schema.Types.ObjectId, required: false, ref: 'User'},
+  createdOn: {type: Date, required: false},
   likes: {type: Array, required: false},
 })
 

@@ -5,12 +5,12 @@ const PreferncesSchema: Schema = new Schema(
   {
     name: {type: String, required: true},
     email: {type: String, required: true},
-    phone: {type: String, required: true},
-    Iam: {type: String, required: true},
-    location: {type: String, required: true},
-    gender: {type: String, required: true},
-    user: {type: Schema.Types.ObjectId, required: true, ref: 'User'},
-    travelInterests: {type: Array, required: true}
+    password:{type: String, required: true},
+    phone: {type: String, required: false},
+    Iam: {type: String, required: false},
+    location: {type: String, required: false},
+    gender: {type: String, required: false},
+    travelInterests: {type: Array, required: false}
   })
 
 export const Preferences: Model<IPrefernces> = model<IPrefernces>('Prefernces', PreferncesSchema)
