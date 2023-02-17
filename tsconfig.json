@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rootDir": "./lib",
+    "target": "es2016",
+    "outDir": "./build",
+    "lib": [
+      "es7",
+      "esnext.asynciterable"
+    ]
+  },
+  "include": [
+    "lib/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
