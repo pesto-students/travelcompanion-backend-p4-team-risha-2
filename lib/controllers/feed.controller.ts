@@ -31,6 +31,8 @@ export class FeedController {
   }
 
   async getFeedById(req, res) {
+    const prefernce = await Feed.findById(req.params.login_id);
+    res.json(prefernce)
   }
 
   async deleteFeed(req, res) {

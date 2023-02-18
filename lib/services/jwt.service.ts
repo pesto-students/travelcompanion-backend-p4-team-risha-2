@@ -2,6 +2,7 @@ import {JWT_SECRET} from "../constants";
 import * as jwt from "jsonwebtoken"
 import {Request} from "express";
 import {User} from "../models/User";
+import { Preferences } from "../models/Prefernces";
 
 class JwtService {
   sign(data) {
@@ -16,7 +17,7 @@ class JwtService {
         throw new Error('Invalid token');
       }
       const {id} = verify;
-      const user = await User.findOne({_id: id})
+      const user = await Preferences.findOne({_id: id})
       if (!user) {
         throw new Error('Invalid user');
       }

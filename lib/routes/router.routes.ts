@@ -16,11 +16,12 @@ export class RouterRoutes {
     // authentication
     app.post("/login/", this.authenticationController.loginSuccess);
     app.post("/register/", this.authenticationController.register);
+    app.get("/users",this.authenticationController.allUsers)
 
     // user
     app.get("/me/", this.authenticationController.meUser);
     app.get("/preferences", this.preferencesController.getPrefernces)
-    // app.get("/preferences/:login_id", this.preferencesController.getPreferncesByID)
+    app.get("/preferences/:login_id", this.preferencesController.getPreferncesByID)
     app.post("/preferences", this.preferencesController.postPrefernces);
 
     // search

@@ -1,7 +1,7 @@
 import {model, Model, Schema} from "mongoose";
 
 const feedSchema = new Schema({
-  body: {type: String, required: true},
+  body: {type: String, required: false},
   images: {type: Array, required: false},
   author: {type: Schema.Types.ObjectId, required: false, ref: 'User'},
   createdOn: {type: Date, required: false},
