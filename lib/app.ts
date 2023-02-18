@@ -7,7 +7,7 @@ import * as mongoose from 'mongoose'
 
 //db connection
 mongoose.connect(
-  "no cred",
+  "mongodb+srv://teasm2-US:RtkltsLh1YZSroUq@cluster0.nymn7fl.mongodb.net/?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
