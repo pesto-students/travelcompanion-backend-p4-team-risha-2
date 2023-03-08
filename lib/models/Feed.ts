@@ -2,7 +2,7 @@ import {model, Model, Schema} from "mongoose";
 
 const feedSchema = new Schema({
   body: {type: String, required: false},
-  images: {type: Array, required: false},
+  images: {type: String, required: false},
   author: {type: Schema.Types.ObjectId, required: false, ref: 'User'},
   createdOn: {type: Date, required: false},
   likes: {type: Array, required: false},
@@ -10,7 +10,7 @@ const feedSchema = new Schema({
 
 interface IFeed {
   body: string
-  images: string[]
+  images: string
   author: string
   createdOn: Date
   likes: string[]

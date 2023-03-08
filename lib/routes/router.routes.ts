@@ -23,6 +23,7 @@ export class RouterRoutes {
     app.get("/preferences", this.preferencesController.getPrefernces)
     app.get("/preferences/:login_id", this.preferencesController.getPreferncesByID)
     app.post("/preferences", this.preferencesController.postPrefernces);
+    app.post("/preferences/:login_id", this.preferencesController.patchPrefernces);
 
     // search
     app.get("/mapPlacesbySearch/:location", this.preferencesController.getPreferncesBylocation);
