@@ -6,6 +6,7 @@ const feedSchema = new Schema({
   author: {type: Schema.Types.ObjectId, required: false, ref: 'User'},
   createdOn: {type: Date, required: false},
   likes: {type: Array, required: false},
+  name: {type: String, required: false},
 })
 
 interface IFeed {
@@ -13,7 +14,8 @@ interface IFeed {
   images: string
   author: string
   createdOn: Date
-  likes: string[]
+  likes: [{userID: String, postID: String}]
+  name: string
 }
 
 export const Feed: Model<IFeed> = model<IFeed>('Feed', feedSchema)
