@@ -14,7 +14,7 @@ interface IFeed {
   images: string
   author: string
   createdOn: Date
-  likes: [{userID: String, postID: String}]
+  likes: [{userID: String, postID: String, likeNumber: number, likedBy: String}]
   name: string
 }
 

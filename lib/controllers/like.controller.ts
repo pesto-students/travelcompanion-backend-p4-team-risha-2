@@ -14,7 +14,7 @@ export class LikeController {
             if (post.likes.includes(user._id)) {
                 return res.status(400).json({ msg: 'Feed already liked' });
             }
-            post.likes.push({userID: user._id, postID: req.params.postId});
+            post.likes.push({userID: user._id, postID: req.params.postId, likeNumber: post.likes.length, likedBy:req.params.name});
             await post.save();
             const likes = post.likes.length;
             res.json({ likes });
@@ -26,12 +26,14 @@ export class LikeController {
     async getLike(req: Request, res: Response) {
         try {
             const user = await jwtService.verify(req);
+            console.log(user)
             const post = await Feed.findById(req.params.postId);
             if (!post) {
                 return res.status(404).json({ msg: 'Feed not found' });
             }
             const likes = post.likes.length;
             const liked = post.likes.includes(user._id);
+            // const userName = post.likes.userName
             res.json({ likes, liked });
         } catch (err) {
             console.error(err.message);
