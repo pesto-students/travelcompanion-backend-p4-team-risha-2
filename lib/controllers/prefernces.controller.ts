@@ -5,13 +5,13 @@ import jwtService from "../services/jwt.service";
 
 export class PreferencesController {
   async getPrefernces(req: Request, res: Response) {
-    const prefernce = await Preferences.find().populate('user')
+    const prefernce = await Preferences.find().populate('user').limit(10)
     res.json(prefernce)
   }
 
   async postPrefernces(req: Request, res: Response) {
     const user = await jwtService.verify(req);
-
+    
     const prefernce = new Preferences({
       "name": req.body.name,
       "email": req.body.email,
@@ -23,7 +23,7 @@ export class PreferencesController {
       // this is an array of place ID not the mapPlace id
       travelInterests: req.body.travelInterests
     })
-
+console.log(prefernce)
     //save to db
     try {
       const prefernceData = await prefernce.save();
@@ -40,9 +40,7 @@ export class PreferencesController {
   }
 
   async getPreferncesBylocation(req: Request, res: Response) {
-    console.log("p", req.params.location)
-    const prefernce = await Preferences.findOne({location: req.params.location});
-    console.log(req.body.location, prefernce)
+    const prefernce = await Preferences.find({location: req.params.location});
     res.json(prefernce)
   }
 
