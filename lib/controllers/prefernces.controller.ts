@@ -40,9 +40,7 @@ console.log(prefernce)
   }
 
   async getPreferncesBylocation(req: Request, res: Response) {
-    console.log("p", req.params.location)
-    const prefernce = await Preferences.findOne({location: req.params.location});
-    console.log(req.body.location, prefernce)
+    const prefernce = await Preferences.find({location: req.params.location});
     res.json(prefernce)
   }
 
