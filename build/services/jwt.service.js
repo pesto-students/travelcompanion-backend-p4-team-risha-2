@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("../constants");
 const jwt = require("jsonwebtoken");
-const User_1 = require("../models/User");
+const Prefernces_1 = require("../models/Prefernces");
 class JwtService {
     sign(data) {
         return jwt.sign(data, constants_1.JWT_SECRET);
@@ -25,7 +25,7 @@ class JwtService {
                     throw new Error('Invalid token');
                 }
                 const { id } = verify;
-                const user = yield User_1.User.findOne({ _id: id });
+                const user = yield Prefernces_1.Preferences.findOne({ _id: id });
                 if (!user) {
                     throw new Error('Invalid user');
                 }
