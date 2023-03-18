@@ -31,13 +31,12 @@ export class FeedController {
         body: req.body.body,
         images: req.body.images,
         author: user._id,
-        name: req.body.name,
+        name: req.body.author,
         createdOn: new Date(),
         likes: [],
       })
       const savedFeed = await newFeed.save();
       res.json(savedFeed)
-      console.log(savedFeed)
 
     } catch (err) {
       res.send(err)

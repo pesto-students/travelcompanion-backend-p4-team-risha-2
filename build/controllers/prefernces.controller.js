@@ -16,7 +16,7 @@ const jwt_service_1 = require("../services/jwt.service");
 class PreferencesController {
     getPrefernces(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const prefernce = yield Prefernces_1.Preferences.find().populate('user');
+            const prefernce = yield Prefernces_1.Preferences.find().populate('user').limit(10);
             res.json(prefernce);
         });
     }
@@ -34,6 +34,7 @@ class PreferencesController {
                 // this is an array of place ID not the mapPlace id
                 travelInterests: req.body.travelInterests
             });
+            console.log(prefernce);
             //save to db
             try {
                 const prefernceData = yield prefernce.save();
@@ -53,9 +54,7 @@ class PreferencesController {
     }
     getPreferncesBylocation(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("p", req.params.location);
-            const prefernce = yield Prefernces_1.Preferences.findOne({ location: req.params.location });
-            console.log(req.body.location, prefernce);
+            const prefernce = yield Prefernces_1.Preferences.find({ location: req.params.location });
             res.json(prefernce);
         });
     }

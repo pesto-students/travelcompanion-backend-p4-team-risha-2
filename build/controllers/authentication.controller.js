@@ -59,7 +59,6 @@ class AuthenticationController {
                 res.send("User Already Exists");
             if (!doc) {
                 const hashedPassword = yield bcrypt.hash(req.body.password, 10);
-                // const user = await jwtService.verify(req);
                 const newUser = new Prefernces_1.Preferences({
                     username: req.body.username,
                     email: req.body.email,
@@ -69,7 +68,6 @@ class AuthenticationController {
                     "Iam": req.body.Iam,
                     "location": req.body.location,
                     "gender": req.body.gender,
-                    // user: Types.ObjectId(user.id),
                     // // this is an array of place ID not the mapPlace id
                     travelInterests: req.body.travelInterests
                 });
@@ -88,6 +86,12 @@ class AuthenticationController {
             catch (e) {
                 res.status(401).send(e.message);
             }
+        });
+    }
+    allUsers(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prefernce = yield Prefernces_1.Preferences.find().populate('user');
+            res.json(prefernce);
         });
     }
 }

@@ -15,13 +15,24 @@ const jwt_service_1 = require("../services/jwt.service");
 class FeedController {
     getFeed(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const feeds = yield Feed_1.Feed.find().populate('author').limit(50);
-                res.json(feeds);
-            }
-            catch (e) {
-                res.status(500).send(e.message);
-            }
+            // try {
+            //   const feeds = await Feed.find().populate('author').limit(50);
+            //   res.json(feeds)
+            // } catch (e) {
+            //   res.status(500).send(e.message)
+            // }
+            const feeds = yield Feed_1.Feed.aggregate([
+                { $sort: { createdOn: -1 } },
+                { $limit: 50 } // Limit the results to the first document
+            ], function (err, result) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    const feed = result;
+                    res.json(feed);
+                }
+            });
         });
     }
     postFeed(req, res) {
@@ -32,6 +43,7 @@ class FeedController {
                     body: req.body.body,
                     images: req.body.images,
                     author: user._id,
+                    name: req.body.author,
                     createdOn: new Date(),
                     likes: [],
                 });
@@ -45,6 +57,8 @@ class FeedController {
     }
     getFeedById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const prefernce = yield Feed_1.Feed.findById(req.params.login_id);
+            res.json(prefernce);
         });
     }
     deleteFeed(req, res) {
